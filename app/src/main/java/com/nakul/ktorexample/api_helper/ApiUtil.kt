@@ -4,6 +4,7 @@ import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android
 import io.ktor.client.features.DefaultRequest
+import io.ktor.client.features.cache.HttpCache
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.LogLevel
@@ -46,14 +47,18 @@ object ApiUtil {
                 level = LogLevel.ALL
             }
 
-            install(ResponseObserver) {
-                onResponse { response ->
-                    Log.d("HTTP status:", "${response.status.value}")
-                }
-            }
+//            install(ResponseObserver) {
+//                onResponse { response ->
+//                    Log.d("HTTP status:", "${response.status.value}")
+//                }
+//            }
 
             install(DefaultRequest) {
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
+            }
+
+            install(HttpCache) {
+
             }
         }
     }

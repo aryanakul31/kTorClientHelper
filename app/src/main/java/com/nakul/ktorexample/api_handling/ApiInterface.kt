@@ -15,4 +15,11 @@ object ApiInterface {
             }
         }
     }
+
+    suspend fun checkCache(): ResponseModel {
+        return ApiUtil.getHttpClient().use {
+            it.get("https://httpbin.org/status/304") {
+            }
+        }
+    }
 }
