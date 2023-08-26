@@ -20,4 +20,15 @@ class MainVM : ViewModel() {
             }
         )
     }
+
+    fun hitCacheApi(context: Context) = viewModelScope.launch {
+        ApiCalling.hitApi(
+            context = context,
+            layoutId = R.layout.progress_loader,
+            requestHandler = { ApiInterface.checkCache() },
+            onResponse = {
+                Log.e("Data onResponse", it.articles?.get(0).toString())
+            }
+        )
+    }
 }

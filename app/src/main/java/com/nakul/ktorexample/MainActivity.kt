@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             viewModel.hitApi(this@MainActivity)
+            viewModel.hitCacheApi(this@MainActivity)
             delay(5_000)
             viewModel.hitApi(this@MainActivity)
             viewModel.hitApi(this@MainActivity)
