@@ -7,11 +7,11 @@ import io.ktor.client.request.parameter
 
 object ApiInterface {
     suspend fun getUserData(): ResponseModel {
-        return ApiUtil.ktorHttpClient.use {
-            it.get("${ApiUrls.BASE_URL}${ApiUrls.NEWS}"){
-                parameter("q","Android")
-                parameter("sortBy","publishedAt")
-                parameter("apiKey","3e36f11979ac41178fe55d05b52516c9")
+        return ApiUtil.getHttpClient().use {
+            it.get("${ApiUrls.BASE_URL}${ApiUrls.NEWS}") {
+                parameter("q", "Android")
+                parameter("sortBy", "publishedAt")
+                parameter("apiKey", "3e36f11979ac41178fe55d05b52516c9")
             }
         }
     }
