@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import com.nakul.ktorexample.R
 import io.ktor.client.features.ResponseException
+import io.ktor.client.features.cache.InvalidCacheStateException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
@@ -32,6 +33,11 @@ object ApiCalling {
     private val onApiErrorDefaultHandler =
         { context: Context, message: String, exception: Throwable? ->
             Log.e("Api Util", "onApiErrorDefaultHandler $message")
+            when(exception){
+                is InvalidCacheStateException ->{
+                    //TODO Handle 304 Response with absent cache
+                }
+            }
             exception?.printStackTrace()
             showError(context, message)
         }
