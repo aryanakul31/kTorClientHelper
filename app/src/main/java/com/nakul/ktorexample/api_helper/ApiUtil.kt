@@ -24,35 +24,37 @@ object ApiUtil {
         isLenient = true
         ignoreUnknownKeys = true
     }
-    val ktorHttpClient = HttpClient(Android) {
+    fun getHttpClient(): HttpClient {
+        return HttpClient(Android) {
 
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(json)
+            install(JsonFeature) {
+                serializer = KotlinxSerializer(json)
 
-            engine {
-                connectTimeout = TIME_OUT
-                socketTimeout = TIME_OUT
-            }
-        }
-
-        install(Logging) {
-            logger = object : Logger {
-                override fun log(message: String) {
-                    Log.v("Logger Ktor =>", message)
+                engine {
+                    connectTimeout = TIME_OUT
+                    socketTimeout = TIME_OUT
                 }
-
             }
-            level = LogLevel.ALL
-        }
 
-        install(ResponseObserver) {
-            onResponse { response ->
-                Log.d("HTTP status:", "${response.status.value}")
+            install(Logging) {
+                logger = object : Logger {
+                    override fun log(message: String) {
+                        Log.v("Logger Ktor =>", message)
+                    }
+
+                }
+                level = LogLevel.ALL
             }
-        }
 
-        install(DefaultRequest) {
-            header(HttpHeaders.ContentType, ContentType.Application.Json)
+            install(ResponseObserver) {
+                onResponse { response ->
+                    Log.d("HTTP status:", "${response.status.value}")
+                }
+            }
+
+            install(DefaultRequest) {
+                header(HttpHeaders.ContentType, ContentType.Application.Json)
+            }
         }
     }
 }
