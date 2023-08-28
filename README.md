@@ -63,5 +63,15 @@ In this repo, we will implement the same step by step
             }
         )
     }
-    
-    
+
+## Additional Functionality
+### To enable/disable cache (Enabled by default)
+####  In [ApiUtil](./app/src/main/java/com/nakul/ktorexample/api_helper/ApiUtil.kt), while creating HttpClient, install HttpCache as below
+             fun getHttpClient(): HttpClient {
+                    ...
+                     install(DefaultRequest) {
+                        header(HttpHeaders.ContentType, ContentType.Application.Json)
+                    }
+                    ...
+             }
+         
